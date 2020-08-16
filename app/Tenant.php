@@ -28,10 +28,9 @@ class Tenant extends Model
 
         DB::purge('tenant');
 
-        DB::reconnect('tenant');
-
-        Schema::connection('tenant')->getConnection()->reconnect();
-
+        app('cache')->forgetDriver(
+            config('cache.default')
+        );
         return $this;
     }
 
